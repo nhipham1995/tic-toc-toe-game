@@ -1,13 +1,92 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.game-container {
+  margin-top: 30px;
+}
+.square-row {
+  display: flex;
+  justify-content: center;
+}
+.square-item {
+  height: 60px;
+  width: 60px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 4px;
+  margin: 2px;
+  padding: 0;
+  background-color: rgb(63, 62, 62);
+  cursor: pointer;
+}
+.active:hover {
+  background-color: rgb(0, 0, 0);
+}
+.inactive:hover {
+  cursor: not-allowed;
+}
+.move-info-title {
+  margin-top: 60px;
+  margin-bottom: 0;
+}
+.instruction-info {
+  font-style: italic;
+  font-weight: 100;
+  font-size: small;
+}
+.move-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+.move-list li {
+  cursor: pointer;
+  margin-top: 5px;
+}
+.move-list li:nth-child(2n + 1) button {
+  background-color: rgb(164, 231, 231);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.move-list li:nth-child(2n) button {
+  background-color: rgb(242, 186, 198);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.green-square {
+  color: rgb(88, 228, 228);
+  border: none;
+}
+.red-square {
+  color: rgb(239, 144, 165);
+  border: none;
+}
+.win-square {
+  background-color: rgb(0, 0, 0);
+}
+
+.result-order-toggle,
+.restart-button {
+  background-color: rgb(58, 123, 254);
+  color: aliceblue;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 30px;
 }
