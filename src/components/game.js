@@ -2,18 +2,18 @@ import { useState } from "react";
 import SquareList from "./squareList";
 import winnerCheck from "../functions/haveWinner";
 import moveDescription from "../functions/moveDescription";
+
 function Game() {
   // store all the move from the beginning
   const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [stepNum, setStepNum] = useState(0);
+  // track the position of played squares each time
   const [moveDes, setMoveDes] = useState([]);
-  const [isAscendingOrder, setIsAscendingOrder] = useState(true);
+  const [isAscOrder, setIsAscOrder] = useState(true);
 
   const currentSquares = history[history.length - 1];
 
   const handleNextStep = (newSquares, squareInd) => {
     setHistory([...history, newSquares]);
-    setStepNum(stepNum + 1);
     const newMove = moveDescription(squareInd);
     setMoveDes([...moveDes, newMove]);
   };
@@ -22,12 +22,9 @@ function Game() {
     const newHistory = history.slice(0, i);
     setHistory(newHistory);
     setMoveDes(moveDes.slice(0, i - 1));
-    setStepNum(i + 1);
   };
-
   const restartFunc = () => {
     setHistory([Array(9).fill(null)]);
-    setStepNum(0);
     setMoveDes([]);
   };
 
@@ -35,7 +32,7 @@ function Game() {
 
   const instructionDes =
     winner === null
-      ? `Next player: ${stepNum % 2 === 0 ? "X" : "O"}`
+      ? `Next player: ${moveDes.length % 2 === 0 ? "X" : "O"}`
       : winner === "draw"
       ? "This game ends in a draw."
       : `Winner is ${winner[0]}`;
@@ -51,7 +48,7 @@ function Game() {
       <SquareList
         onNextStep={handleNextStep}
         squares={currentSquares}
-        stepNum={stepNum}
+        stepNum={moveDes.length}
         squareInd={history.length}
         winPosition={winner && winner[1] !== "r" ? winner[1] : undefined}
       />
@@ -64,9 +61,9 @@ function Game() {
         <ul className="move-list">
           <button
             className="result-order-toggle"
-            onClick={() => setIsAscendingOrder(!isAscendingOrder)}
+            onClick={() => setIsAscOrder(!isAscOrder)}
           >
-            {isAscendingOrder ? "Ascending Order" : "Descending Order"}
+            {isAscOrder ? "Ascending Order" : "Descending Order"}
           </button>
           {moveDes.map((description, i) => {
             if (history.length === 0) return null;
@@ -75,9 +72,7 @@ function Game() {
               <li key={i} onClick={() => rePlayAt(i + 2)}>
                 <button>
                   {i + 1}.{" "}
-                  {isAscendingOrder
-                    ? description
-                    : moveDes[moveDes.length - 1 - i]}
+                  {isAscOrder ? description : moveDes[moveDes.length - 1 - i]}
                 </button>
               </li>
             );
